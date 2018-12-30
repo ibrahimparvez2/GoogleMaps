@@ -1,6 +1,6 @@
 <html>  
     <head>  
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=keygoeshere"
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURKEYGOESHERE"
             type="text/javascript"></script>    
         <title>Geolocation</title>  
         <body>  
@@ -30,14 +30,32 @@
       },  
       mapTypeId: google.maps.MapTypeId.ROADMAP  
    };  
+
    var map = new google.maps.Map(document.getElementById('mapcontainer'),options);  
    var marker = new google.maps.Marker({  
    position: coords,  
    map: map,  
    title: 'you are here'  
 })
+
+addMarker("51.51610, -0.12728",map);
 };    
-       
+
+
+function addMarker(location,map) {
+  // parse the input string into a google.maps.LatLng 
+  var coords = location.split(",");
+  var position = new google.maps.LatLng(
+                       parseFloat(coords[0]), 
+                       parseFloat(coords[1])
+                     );
+  var markers=new google.maps.Marker({
+        position:position
+      });
+
+  markers.setMap(map);
+}
+
         var x = document.getElementById("demo");
         function getLocation() {
           if (navigator.geolocation) {
